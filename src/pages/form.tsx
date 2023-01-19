@@ -8,35 +8,28 @@ import {
   i18n,
   initI18n,
   useTranslation,
-  useMount,
 } from 'react-uni-comps';
 import * as langs from '../langs';
 
 const defaultLang = 'zh';
 const defaultNamespace = 'ns';
 
-initI18n();
+initI18n({
+  defaultNS: defaultNamespace,
+  fallbackLng: defaultLang,
+});
+
+i18n.addResources('zh', defaultNamespace, langs.zh);
+i18n.addResources('en', defaultNamespace, langs.en);
 
 export default function App() {
   const { countdown, isRunning, start, isReStarted } = useCountdown(60);
   const { t } = useTranslation(defaultNamespace);
   const [lang, setLang] = useState(defaultLang);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
-
-  useMount(() => {
-    // 模拟动态加载语言
-    setTimeout(() => {
-      i18n.addResources('zh', defaultNamespace, langs.zh);
-      i18n.addResources('en', defaultNamespace, langs.en);
-      setLang('zh');
-
-      setReady(true);
-    }, 200);
-  });
 
   return (
     <Form toastError>
