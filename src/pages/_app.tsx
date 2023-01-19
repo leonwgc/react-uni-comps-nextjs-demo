@@ -1,7 +1,13 @@
 import type { AppProps } from 'next/app';
+import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { ThemeProvider, createGlobalStyle } from 'react-uni-comps';
+
+// fix warning
+if (typeof document === 'undefined') {
+  React.useLayoutEffect = React.useEffect;
+}
 
 const GlobalStyle = createGlobalStyle`
   body {

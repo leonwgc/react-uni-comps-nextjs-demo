@@ -15,10 +15,7 @@ import * as langs from '../langs';
 const defaultLang = 'zh';
 const defaultNamespace = 'ns';
 
-initI18n({
-  debug: true,
-  initImmediate: false, // dynamic load lang
-});
+initI18n();
 
 export default function App() {
   const { countdown, isRunning, start, isReStarted } = useCountdown(60);
