@@ -1,4 +1,6 @@
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import Script from 'next/script';
 import { ThemeProvider, createGlobalStyle } from 'react-uni-comps';
 
 const GlobalStyle = createGlobalStyle`
@@ -18,10 +20,17 @@ const GlobalStyle = createGlobalStyle`
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <title>test nextjs</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta name="description" content="leonwgc try nextjs" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
       <GlobalStyle />
       <ThemeProvider color={'#005cff'}>
         <Component {...pageProps} />
       </ThemeProvider>
+      <Script>{`console.log('app started')`}</Script>
     </>
   );
 }
